@@ -1,0 +1,20 @@
+{
+  "name": "podcastr",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "dependencies": {
+    "@polymer/decorators": "^3.0.0",
+    "@polymer/polymer": "^3.4.1",
+    "date-fns": "^2.21.1"
+  },
+  "devDependencies": {
+    "typescript": "^4.2.4",
+    "vite": "^2.2.1",
+    "vite-tsconfig-paths": "^3.3.8"
+  }
+}
