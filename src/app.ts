@@ -17,12 +17,20 @@ class App extends PolymerElement {
         .wrapper main {
           flex: 1;
         }
+
+        .content {
+          height: calc(100vh - 6.5rem);
+          overflow-y: scroll;
+        }
       </style>
 
       <div class="wrapper">
         <main>
           <pcr-header></pcr-header>
-          <slot></slot>
+
+          <div class="content">
+            <slot></slot>
+          </div>
         </main>
 
         <pcr-player></pcr-player>

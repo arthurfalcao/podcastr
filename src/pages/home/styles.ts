@@ -6,8 +6,6 @@ export default html`
   <style include="shared-styles">
     .wrapper {
       padding: 0 4rem;
-      height: calc(100vh - 6.5rem);
-      overflow-y: scroll;
     }
 
     .wrapper h2 {
