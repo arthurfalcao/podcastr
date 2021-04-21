@@ -1,7 +1,6 @@
 import { customElement, property } from "@polymer/decorators";
 import { html, PolymerElement } from "@polymer/polymer";
 import { parseISO, format } from 'date-fns'
-import ptBR from 'date-fns/locale/pt-BR'
 
 import '@polymer/polymer/lib/elements/dom-repeat'
 
@@ -41,7 +40,7 @@ interface HomeProps {
   allEpisodes: Episode[]
 }
 
-@customElement('pcr-home')
+@customElement('pcr-home-page')
 class Home extends PolymerElement implements HomeProps {
   @property({ type: Array })
   latestEpisodes: Episode[]
@@ -137,7 +136,7 @@ class Home extends PolymerElement implements HomeProps {
         thumbnail: episode.thumbnail,
         members: episode.members,
         description: episode.description,
-        publishedAt: format(parseISO(episode.published_at), 'd MMM yy', { locale: ptBR }),
+        publishedAt: format(parseISO(episode.published_at), 'd MMM yy'),
         durationAsString: convertDurationToTimeString(episode.file.duration),
         duration: episode.file.duration,
         url: episode.file.url

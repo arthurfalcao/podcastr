@@ -3,7 +3,6 @@ import { customElement } from '@polymer/decorators'
 
 import './components/header/pcr-header'
 import './components/player/pcr-player'
-import './pages/home/pcr-home'
 import './styles/shared'
 
 @customElement('pcr-shell')
@@ -23,7 +22,7 @@ class App extends PolymerElement {
       <div class="wrapper">
         <main>
           <pcr-header></pcr-header>
-          <pcr-home></pcr-home>
+          <slot></slot>
         </main>
 
         <pcr-player></pcr-player>
