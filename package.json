@@ -5,14 +5,17 @@
   "scripts": {
     "start": "vite",
     "build": "vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "server": "json-server server.json -w -d 750 -p 3333"
   },
   "dependencies": {
     "@polymer/decorators": "^3.0.0",
     "@polymer/polymer": "^3.4.1",
+    "axios": "^0.21.1",
     "date-fns": "^2.21.1"
   },
   "devDependencies": {
+    "json-server": "^0.16.3",
     "typescript": "^4.2.4",
     "vite": "^2.2.1",
     "vite-tsconfig-paths": "^3.3.8"
