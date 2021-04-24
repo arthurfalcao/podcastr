@@ -10,10 +10,13 @@
   },
   "dependencies": {
     "@polymer/decorators": "^3.0.0",
+    "@polymer/paper-slider": "^3.0.1",
     "@polymer/polymer": "^3.4.1",
     "@vaadin/router": "^1.7.4",
     "axios": "^0.21.1",
-    "date-fns": "^2.21.1"
+    "classnames": "^2.3.1",
+    "date-fns": "^2.21.1",
+    "zustand": "^3.4.1"
   },
   "devDependencies": {
     "json-server": "^0.16.3",

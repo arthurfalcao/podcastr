@@ -142,6 +142,7 @@ export default html`
       width: 2.5rem;
       height: 2.5rem;
       border-radius: 0.5rem;
+      object-fit: cover;
     }
 
     .all-episodes table td a {

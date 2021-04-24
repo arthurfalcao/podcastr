@@ -4,6 +4,7 @@ import { parseISO, format } from 'date-fns'
 
 import '@polymer/polymer/lib/elements/dom-repeat'
 
+import { PlayerMixin } from "../../mixins/PlayerMixin";
 import { api } from '../../services/api'
 import { convertDurationToTimeString } from '../../utils/convertDurationToTimeString'
 
@@ -41,7 +42,7 @@ interface HomeProps {
 }
 
 @customElement('pcr-home-page')
-class Home extends PolymerElement implements HomeProps {
+class Home extends PlayerMixin(PolymerElement) implements HomeProps {
   @property({ type: Array })
   latestEpisodes: Episode[]
 
@@ -70,7 +71,7 @@ class Home extends PolymerElement implements HomeProps {
                   <span>[[episode.durationAsString]]</span>
                 </div>
 
-                <button type="button">
+                <button type="button" on-click="handleClickPlay">
                   <img src="/play-green.svg" alt="Play episode" />
                 </button>
               </li>
@@ -150,6 +151,11 @@ class Home extends PolymerElement implements HomeProps {
     }
 
     fetchEpisodes()
+  }
+
+  private handleClickPlay(e: MouseEvent) {
+    // @ts-ignore
+    this.play(e.model.episode as Episode);
   }
 }
 
