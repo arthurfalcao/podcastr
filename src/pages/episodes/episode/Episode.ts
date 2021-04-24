@@ -3,6 +3,7 @@ import { html, PolymerElement } from "@polymer/polymer";
 import { RouterLocation } from "@vaadin/router";
 import { format, parseISO } from "date-fns";
 
+import { PlayerMixin } from "../../../mixins/PlayerMixin";
 import { api } from "../../../services/api";
 import { convertDurationToTimeString } from "../../../utils/convertDurationToTimeString";
 
@@ -39,7 +40,7 @@ interface EpisodeProps {
 }
 
 @customElement("pcr-episode-page")
-class EpisodePage extends PolymerElement implements EpisodeProps {
+class EpisodePage extends PlayerMixin(PolymerElement) implements EpisodeProps {
   location: RouterLocation;
 
   @property({ type: Object })
@@ -59,7 +60,7 @@ class EpisodePage extends PolymerElement implements EpisodeProps {
             <img src="[[episode.thumbnail]]" alt="[[episode.title]]" />
           </div>
 
-          <button type="button" class="button">
+          <button type="button" class="button" on-click="handlePlay">
             <img src="/play.svg" alt="Play episode" />
           </button>
         </div>
@@ -100,6 +101,10 @@ class EpisodePage extends PolymerElement implements EpisodeProps {
     };
 
     fetchEpisode();
+  }
+
+  private handlePlay() {
+    this.play(this.episode)
   }
 }
 

@@ -71,7 +71,7 @@ class Home extends PlayerMixin(PolymerElement) implements HomeProps {
                   <span>[[episode.durationAsString]]</span>
                 </div>
 
-                <button type="button" on-click="handleClickPlay">
+                <button type="button" on-click="handlePlayLatest">
                   <img src="/play-green.svg" alt="Play episode" />
                 </button>
               </li>
@@ -106,7 +106,7 @@ class Home extends PlayerMixin(PolymerElement) implements HomeProps {
                   <td style="width: 100px;">[[episode.publishedAt]]</td>
                   <td>[[episode.durationAsString]]</td>
                   <td>
-                    <button type="button">
+                    <button type="button" on-click="handlePlayAll">
                       <img src="/play-green.svg" alt="Play episode" />
                     </button>
                   </td>
@@ -153,9 +153,16 @@ class Home extends PlayerMixin(PolymerElement) implements HomeProps {
     fetchEpisodes()
   }
 
-  private handleClickPlay(e: MouseEvent) {
-    // @ts-ignore
-    this.play(e.model.episode as Episode);
+  private handlePlayLatest(e: MouseEvent) {
+    const episodeList = [...this.latestEpisodes, ...this.allEpisodes];
+    // @ts-ignore 
+    this.playList(episodeList, e.model.index);
+  }
+
+  private handlePlayAll(e: MouseEvent) {
+    const episodeList = [...this.latestEpisodes, ...this.allEpisodes];
+    // @ts-ignore 
+    this.playList(episodeList, e.model.index + this.latestEpisodes.length);
   }
 }
 

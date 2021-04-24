@@ -1,4 +1,4 @@
-import { computed, observe } from "@polymer/decorators";
+import { computed, observe, property } from "@polymer/decorators";
 import { html, PolymerElement } from "@polymer/polymer";
 import classNames from "classnames";
 
@@ -6,10 +6,14 @@ import '@polymer/polymer/lib/elements/dom-if'
 import '@polymer/paper-slider/paper-slider'
 
 import { PlayerMixin, Episode } from "../../mixins/PlayerMixin";
+import { convertDurationToTimeString } from "../../utils/convertDurationToTimeString";
 
 import styles from './styles'
 
 class Player extends PlayerMixin(PolymerElement) {
+  @property({ type: Number })
+  progress = 0;
+
   static get template() {
     return html`
       ${styles}
@@ -34,13 +38,13 @@ class Player extends PlayerMixin(PolymerElement) {
           </div>
         </template>
 
-        <footer class$="[[footerClass(episode)]]">
+        <footer class$="[[getFooterClass(episode)]]">
           <div class="progress">
-            <span>00:00</span>
+            <span>[[convertDurationToTimeString(progress)]]</span>
 
             <div class="slider">
               <template is="dom-if" if="[[episode]]">
-                <paper-slider></paper-slider>
+                <paper-slider max="[[episode.duration]]" value="{{progress}}" on-change="handleSeek"></paper-slider>
               </template>
 
               <template is="dom-if" if="[[!episode]]">
@@ -48,15 +52,20 @@ class Player extends PlayerMixin(PolymerElement) {
               </template>
             </div>
 
-            <span>00:00</span>
+            <span>[[convertDurationToTimeString(episode.duration)]]</span>
           </div>
 
           <div class="buttons">
-            <button type="button" disabled="[[!episode]]">
+            <button
+              type="button"
+              class$="[[getIsActiveClass(player.isShuffling)]]"
+              disabled="[[isShuffleDisabled(episode, player.episodeList)]]"
+              on-click="toggleShuffle"
+            >
               <img src="/shuffle.svg" alt="Shuffle" />
             </button>
 
-            <button type="button" disabled="[[!episode]]">
+            <button type="button" disabled="[[isPreviousDisabled(episode, hasPrevious)]]" on-click="playPrevious">
               <img src="/play-previous.svg" alt="Play previous" />
             </button>
 
@@ -70,11 +79,11 @@ class Player extends PlayerMixin(PolymerElement) {
               </template>
             </button>
 
-            <button type="button" disabled="[[!episode]]">
+            <button type="button" disabled="[[isNextDisabled(episode, hasNext)]]" on-click="playNext">
               <img src="/play-next.svg" alt="Play next" />
             </button>
 
-            <button type="button" disabled="[[!episode]]">
+            <button type="button" disabled="[[!episode]]" class$="[[getIsActiveClass(player.isLooping)]]" on-click="toggleLoop">
               <img src="/repeat.svg" alt="Repeat" />
             </button>
           </div>
@@ -82,7 +91,15 @@ class Player extends PlayerMixin(PolymerElement) {
       </div>
 
       <template is="dom-if" if="[[episode]]">
-        <audio src="[[episode.url]]" autoplay on-play="handlePlay" on-pause="handlePause" />
+        <audio
+          src="[[episode.url]]"
+          autoplay
+          loop="[[player.isLooping]]"
+          on-play="handlePlay"
+          on-pause="handlePause"
+          on-ended="handleEpisodeEnded"
+          on-loadedmetadata="handleLoadMetadata"
+        />
       </template>
     `
   }
@@ -114,8 +131,53 @@ class Player extends PlayerMixin(PolymerElement) {
     this.setPlayingState(false)
   }
 
-  private footerClass(episode: Episode | null) {
-    return classNames({ 'empty': !episode })
+  private handleEpisodeEnded() {
+    if (this.hasNext) {
+      this.playNext();
+    } else {
+      this.clearPlayerState();
+    }
+  }
+
+  private handleLoadMetadata() {
+    const audioEl = this.shadowRoot?.querySelector('audio');
+
+    audioEl?.addEventListener('timeupdate', () => {
+      this.progress = Math.floor(audioEl.currentTime)
+    });
+  }
+
+  private handleSeek() {
+    const audioEl = this.shadowRoot?.querySelector('audio');
+    const slider = this.shadowRoot?.querySelector('paper-slider');
+
+    if (audioEl && slider?.value) {
+      audioEl.currentTime = slider.value
+    }
+  }
+
+  private convertDurationToTimeString(duration?: number) {
+    return convertDurationToTimeString(duration ?? 0);
+  }
+
+  private isShuffleDisabled(episode: Episode, episodeList: Episode[]): boolean {
+    return !episode || episodeList.length === 1;
+  }
+
+  private isPreviousDisabled(episode: Episode, hasPrevious: boolean): boolean {
+    return !episode || !hasPrevious;
+  }
+
+  private isNextDisabled(episode: Episode, hasNext: boolean): boolean {
+    return !episode || !hasNext;
+  }
+
+  private getFooterClass(episode: Episode | null): string {
+    return classNames({ 'empty': !episode });
+  }
+
+  private getIsActiveClass(isActive: boolean): string {
+    return classNames({ 'is-active': isActive })
   }
 }
 
