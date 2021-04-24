@@ -50,6 +50,8 @@ export function PlayerMixin<T extends Constructor<PolymerElement>>(
   Base: T
 ): T & Constructor<MixinProps> {
   class Mixin extends Base {
+    unsubscribe?: () => void;
+
     @property({ type: Object })
     player: PlayerState;
 
@@ -123,14 +125,19 @@ export function PlayerMixin<T extends Constructor<PolymerElement>>(
       });
     }
 
-    ready() {
-      super.ready();
+    connectedCallback() {
+      super.connectedCallback();
 
       this.player = store.getState();
 
-      store.subscribe((state) => {
+      this.unsubscribe = store.subscribe((state) => {
         this.player = state;
       });
+    }
+
+    disconnectedCallback() {
+      super.disconnectedCallback();
+      this.unsubscribe?.();
     }
   }
 
