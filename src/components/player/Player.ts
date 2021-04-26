@@ -20,7 +20,7 @@ class Player extends PlayerMixin(PolymerElement) {
 
       <div class="wrapper">
         <header>
-          <img src="/playing.svg" alt="Tocando agora"/>
+          <img src="/playing.svg" alt="Playing now"/>
           <strong>Playing now</strong>
         </header>
 
@@ -65,7 +65,7 @@ class Player extends PlayerMixin(PolymerElement) {
               <img src="/shuffle.svg" alt="Shuffle" />
             </button>
 
-            <button type="button" disabled="[[isPreviousDisabled(episode, hasPrevious)]]" on-click="playPrevious">
+            <button type="button" disabled="[[isPreviousOrNextDisabled(episode, hasPrevious)]]" on-click="playPrevious">
               <img src="/play-previous.svg" alt="Play previous" />
             </button>
 
@@ -79,7 +79,7 @@ class Player extends PlayerMixin(PolymerElement) {
               </template>
             </button>
 
-            <button type="button" disabled="[[isNextDisabled(episode, hasNext)]]" on-click="playNext">
+            <button type="button" disabled="[[isPreviousOrNextDisabled(episode, hasNext)]]" on-click="playNext">
               <img src="/play-next.svg" alt="Play next" />
             </button>
 
@@ -164,12 +164,8 @@ class Player extends PlayerMixin(PolymerElement) {
     return !episode || episodeList.length === 1;
   }
 
-  private isPreviousDisabled(episode: Episode, hasPrevious: boolean): boolean {
-    return !episode || !hasPrevious;
-  }
-
-  private isNextDisabled(episode: Episode, hasNext: boolean): boolean {
-    return !episode || !hasNext;
+  private isPreviousOrNextDisabled(episode: Episode, hasPreviousOrNext: boolean): boolean {
+    return !episode || !hasPreviousOrNext;
   }
 
   private getFooterClass(episode: Episode | null): string {

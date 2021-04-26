@@ -53,7 +53,7 @@ export function PlayerMixin<T extends Constructor<PolymerElement>>(
     unsubscribe?: () => void;
 
     @property({ type: Object })
-    player: PlayerState;
+    player = store.getState();
 
     @computed("player")
     get hasPrevious() {
@@ -127,8 +127,6 @@ export function PlayerMixin<T extends Constructor<PolymerElement>>(
 
     connectedCallback() {
       super.connectedCallback();
-
-      this.player = store.getState();
 
       this.unsubscribe = store.subscribe((state) => {
         this.player = state;
