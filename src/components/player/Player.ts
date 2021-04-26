@@ -5,8 +5,8 @@ import classNames from 'classnames'
 import '@polymer/polymer/lib/elements/dom-if'
 import '@polymer/paper-slider/paper-slider'
 
-import { PlayerMixin, Episode } from '../../mixins/PlayerMixin'
-import { convertDurationToTimeString } from '../../utils/convertDurationToTimeString'
+import { PlayerMixin, Episode } from 'mixins/PlayerMixin'
+import { convertDurationToTimeString } from 'utils/convertDurationToTimeString'
 
 import styles from './styles'
 

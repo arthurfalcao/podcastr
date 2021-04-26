@@ -1,6 +1,6 @@
 import { html } from '@polymer/polymer'
 
-import '../../styles/shared'
+import 'styles/shared'
 
 export default html`
   <style include="shared-styles">

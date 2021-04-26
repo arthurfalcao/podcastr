@@ -4,9 +4,9 @@ import { parseISO, format } from 'date-fns'
 
 import '@polymer/polymer/lib/elements/dom-repeat'
 
-import { PlayerMixin } from '../../mixins/PlayerMixin'
-import { api } from '../../services/api'
-import { convertDurationToTimeString } from '../../utils/convertDurationToTimeString'
+import { PlayerMixin } from 'mixins/PlayerMixin'
+import { api } from 'services/api'
+import { convertDurationToTimeString } from 'utils/convertDurationToTimeString'
 
 import styles from './styles'
 

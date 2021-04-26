@@ -3,9 +3,9 @@ import { html, PolymerElement } from '@polymer/polymer'
 import { RouterLocation } from '@vaadin/router'
 import { format, parseISO } from 'date-fns'
 
-import { PlayerMixin } from '../../../mixins/PlayerMixin'
-import { api } from '../../../services/api'
-import { convertDurationToTimeString } from '../../../utils/convertDurationToTimeString'
+import { PlayerMixin } from 'mixins/PlayerMixin'
+import { api } from 'services/api'
+import { convertDurationToTimeString } from 'utils/convertDurationToTimeString'
 
 import styles from './styles'
 
