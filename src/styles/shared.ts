@@ -1,6 +1,6 @@
-import { html } from "@polymer/polymer";
+import { html } from '@polymer/polymer'
 
-const shared = document.createElement("dom-module");
+const shared = document.createElement('dom-module')
 
 const styles = html`
   <style>
@@ -47,7 +47,7 @@ const styles = html`
       cursor: pointer;
     }
   </style>
-`;
+`
 
-shared.insertAdjacentElement("afterbegin", styles);
-shared.register("shared-styles");
+shared.insertAdjacentElement('afterbegin', styles)
+shared.register('shared-styles')

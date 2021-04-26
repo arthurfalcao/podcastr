@@ -1,6 +1,6 @@
-import { html } from "@polymer/polymer";
+import { html } from '@polymer/polymer'
 
-import "../../../styles/shared";
+import '../../../styles/shared'
 
 export default html`
   <style include="shared-styles">
@@ -83,7 +83,7 @@ export default html`
       width: 4px;
       height: 4px;
       border-radius: 2px;
-      background: #DDD;
+      background: #ddd;
       position: absolute;
       left: 0;
       top: 50%;
@@ -100,4 +100,4 @@ export default html`
       margin: 1.5rem 0;
     }
   </style>
-`;
+`

@@ -6,6 +6,7 @@
     "start": "vite",
     "build": "vite build",
     "serve": "vite preview",
+    "lint": "eslint src",
     "server": "json-server server.json -w -d 750 -p 3333"
   },
   "dependencies": {
@@ -19,7 +20,13 @@
     "zustand": "^3.4.1"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.22.0",
+    "@typescript-eslint/parser": "^4.22.0",
+    "eslint": "^7.25.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
     "json-server": "^0.16.3",
+    "prettier": "^2.2.1",
     "typescript": "^4.2.4",
     "vite": "^2.2.1",
     "vite-tsconfig-paths": "^3.3.8"

@@ -1,6 +1,6 @@
-import { html } from "@polymer/polymer";
+import { html } from '@polymer/polymer'
 
-import "../../styles/shared";
+import '../../styles/shared'
 
 export default html`
   <style include="shared-styles">
@@ -27,4 +27,4 @@ export default html`
       text-transform: capitalize;
     }
   </style>
-`;
+`

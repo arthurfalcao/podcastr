@@ -1,6 +1,6 @@
-import { property } from "@polymer/decorators";
-import { html, PolymerElement } from "@polymer/polymer";
-import format from 'date-fns/format';
+import { property } from '@polymer/decorators'
+import { html, PolymerElement } from '@polymer/polymer'
+import format from 'date-fns/format'
 import ptBR from 'date-fns/locale/pt-BR'
 
 import styles from './styles'

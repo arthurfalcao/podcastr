@@ -1,4 +1,4 @@
-import { html } from "@polymer/polymer";
+import { html } from '@polymer/polymer'
 
 import '../../styles/shared'
 
@@ -139,7 +139,8 @@ export default html`
     }
 
     .buttons button.is-active:hover {
-      filter: brightness(0.6) invert(0.35) sepia(1) saturate(3) hue-rotate(100deg);
+      filter: brightness(0.6) invert(0.35) sepia(1) saturate(3)
+        hue-rotate(100deg);
     }
 
     .buttons button.play-button {
@@ -153,4 +154,4 @@ export default html`
       filter: brightness(0.95);
     }
   </style>
-`;
+`

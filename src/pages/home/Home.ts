@@ -1,10 +1,10 @@
-import { customElement, property } from "@polymer/decorators";
-import { html, PolymerElement } from "@polymer/polymer";
+import { customElement, property } from '@polymer/decorators'
+import { html, PolymerElement } from '@polymer/polymer'
 import { parseISO, format } from 'date-fns'
 
 import '@polymer/polymer/lib/elements/dom-repeat'
 
-import { PlayerMixin } from "../../mixins/PlayerMixin";
+import { PlayerMixin } from '../../mixins/PlayerMixin'
 import { api } from '../../services/api'
 import { convertDurationToTimeString } from '../../utils/convertDurationToTimeString'
 
@@ -30,7 +30,7 @@ type Episode = {
   thumbnail: string
   description: string
   members: string
-  duration: number;
+  duration: number
   durationAsString: string
   url: string
   publishedAt: string
@@ -96,7 +96,10 @@ class Home extends PlayerMixin(PolymerElement) implements HomeProps {
                 <tr>
                   <td style="width: 72px;">
                     <div class="image-wrapper">
-                      <img src="[[episode.thumbnail]]" alt="[[episode.title]]" />
+                      <img
+                        src="[[episode.thumbnail]]"
+                        alt="[[episode.title]]"
+                      />
                     </div>
                   </td>
                   <td>
@@ -120,7 +123,7 @@ class Home extends PlayerMixin(PolymerElement) implements HomeProps {
   }
 
   connectedCallback() {
-    super.connectedCallback();
+    super.connectedCallback()
 
     const fetchEpisodes = async () => {
       const { data } = await api.get<EpisodeDto[]>('/episodes', {
@@ -143,7 +146,7 @@ class Home extends PlayerMixin(PolymerElement) implements HomeProps {
         url: episode.file.url
       }))
 
-      const latestEpisodes = episodes.slice(0, 2);
+      const latestEpisodes = episodes.slice(0, 2)
       const allEpisodes = episodes.slice(2, episodes.length)
 
       this.latestEpisodes = latestEpisodes
@@ -154,15 +157,15 @@ class Home extends PlayerMixin(PolymerElement) implements HomeProps {
   }
 
   private handlePlayLatest(e: MouseEvent) {
-    const episodeList = [...this.latestEpisodes, ...this.allEpisodes];
-    // @ts-ignore 
-    this.playList(episodeList, e.model.index);
+    const episodeList = [...this.latestEpisodes, ...this.allEpisodes]
+    // @ts-ignore
+    this.playList(episodeList, e.model.index)
   }
 
   private handlePlayAll(e: MouseEvent) {
-    const episodeList = [...this.latestEpisodes, ...this.allEpisodes];
-    // @ts-ignore 
-    this.playList(episodeList, e.model.index + this.latestEpisodes.length);
+    const episodeList = [...this.latestEpisodes, ...this.allEpisodes]
+    // @ts-ignore
+    this.playList(episodeList, e.model.index + this.latestEpisodes.length)
   }
 }
 
