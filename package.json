@@ -1,7 +1,8 @@
 {
   "name": "podcastr",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
+  "author": "Arthur Falcão <arthurjvfalcao@gmail.com>",
+  "license": "MIT",
   "scripts": {
     "start": "vite",
     "build": "vite build",
