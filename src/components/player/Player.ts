@@ -121,7 +121,7 @@ class Player extends PlayerMixin(PolymerElement) {
           on-pause="handlePause"
           on-ended="handleEpisodeEnded"
           on-loadedmetadata="handleLoadMetadata"
-        />
+        ></audio>
       </template>
     `
   }
